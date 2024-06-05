@@ -11,6 +11,20 @@ public class PetDTO {
     private PetType type;
     private String name;
     private long ownerId;
+    public  PetDTO()
+    {
+
+    }
+
+    public PetDTO(long id, PetType type, String name, long ownerId, LocalDate birthDate, String notes) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.ownerId = ownerId;
+        this.birthDate = birthDate;
+        this.notes = notes;
+    }
+
     private LocalDate birthDate;
     private String notes;
 

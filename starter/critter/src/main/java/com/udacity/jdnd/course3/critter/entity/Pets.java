@@ -10,13 +10,7 @@ import java.time.LocalDate;
 @Entity
 public class Pets {
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public PetType getPetType() {
         return petType;
@@ -42,16 +36,18 @@ public class Pets {
         this.customer = customer;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
 
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
 
     public String getNotes() {
         return notes;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public void setNotes(String notes) {
@@ -60,14 +56,22 @@ public class Pets {
 
     @Id
     @GeneratedValue
-    private  Long id;
+    private  long id;
 
-    public Pets(Long id, PetType petType, String name, Customer customer, LocalDate localDate, String notes) {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Pets(long id, PetType petType, String name, Customer customer, LocalDate birthDate, String notes) {
         this.id = id;
         this.petType = petType;
         this.name = name;
         this.customer = customer;
-        this.localDate = localDate;
+        this.birthDate = birthDate;
         this.notes = notes;
     }
 
@@ -78,7 +82,7 @@ public class Pets {
 
     @ManyToOne(targetEntity = Customer.class,optional = false)
     private Customer customer;
-    private LocalDate localDate;
+    private LocalDate  birthDate;
     private  String notes;
 
 

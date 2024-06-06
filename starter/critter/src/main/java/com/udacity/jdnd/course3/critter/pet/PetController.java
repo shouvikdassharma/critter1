@@ -3,9 +3,12 @@ package com.udacity.jdnd.course3.critter.pet;
 import com.udacity.jdnd.course3.critter.entity.Pets;
 import com.udacity.jdnd.course3.critter.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Handles web requests related to Pets.
@@ -19,27 +22,59 @@ public class PetController {
 
     private PetDTO convertPetEntityToDTO(Pets pets)
     {
-        return  new PetDTO(pets.getId(), pets.getPetType(), pets.getName(), pets.getCustomer().getId(),null, pets.getNotes());
+        return  new PetDTO(pets.getId(), pets.getPetType(), pets.getName(), pets.getCustomer(), pets.getBirthDate(), pets.getNotes());
     }
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
+        Pets pets=new Pets(petDTO.getId(),petDTO.getType(),petDTO.getName(),petDTO.getCustomer(),petDTO.getBirthDate(),petDTO.getNotes());
+        PetDTO dtoPet;
+        try {
 
-        throw new UnsupportedOperationException();
+            dtoPet=convertPetEntityToDTO(petService.save(pets,petDTO.getId()));
+
+        }
+        catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "pets not saved", e);
+        }
+        return dtoPet;
     }
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        Pets pets;
+        try {
+            pets=petService.findPetsById(petId);
+        }
+        catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"pets id not found" + petId,e);
+        }
+        return convertPetEntityToDTO(pets);
     }
 
     @GetMapping
     public List<PetDTO> getPets(){
-        throw new UnsupportedOperationException();
+        List<Pets> pets;
+        try {
+            pets=petService.getAllPets();
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"pet not found" ,e);
+        }
+
+        return pets.stream().map(this::convertPetEntityToDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
-        throw new UnsupportedOperationException();
+        List<Pets> pets;
+        try {
+            pets=petService.findByCustomerId(ownerId);
+        }
+        catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST," Owner id not found" ,e);
+        }
+        return pets.stream().map(this::convertPetEntityToDTO).collect(Collectors.toList());
     }
 }

@@ -10,6 +10,5 @@ import java.util.List;
 
 public interface ScheduleRepository extends JpaRepository<Schedule,Long> {
     List<Schedule> findByPets(Pets pets);
-    List<Schedule> findByCustomer(Customer customer);
-    List<Schedule> findByEmployee(Employee employee);
+    List<Schedule> findByEmployeesIds(Employee employee);
 }

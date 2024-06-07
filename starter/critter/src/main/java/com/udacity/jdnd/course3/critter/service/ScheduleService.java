@@ -11,5 +11,5 @@ public interface ScheduleService {
     Schedule save(Schedule schedule);
     List<Schedule> findScheduleByPet(Pets pet);
     List<Schedule> findScheduleByEmployee(Employee employee);
-    List<Schedule> findScheduleByCustomer(Customer customer);
+
 }

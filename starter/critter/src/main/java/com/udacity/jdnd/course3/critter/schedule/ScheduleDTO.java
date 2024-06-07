@@ -13,8 +13,14 @@ import java.util.Set;
 public class ScheduleDTO {
     private long id;
     private List<Long> employeeIds;
+
+    public ScheduleDTO() {
+    }
+
     private List<Long> petIds;
     private LocalDate date;
+
+
     private Set<EmployeeSkill> activities;
 
     public long getId(){

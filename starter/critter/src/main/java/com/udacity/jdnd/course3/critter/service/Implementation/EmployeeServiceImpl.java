@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> findEmployeeByDateAndSkills(LocalDate localDate, Set<EmployeeSkill> employeeSkill) {
-        return employeeRepository.findEmployeeByDayOfWeek(localDate.getDayOfWeek()).stream().filter(employee -> employee.getEmployeeSkills().containsAll(employeeSkill)).collect(Collectors.toList());
+        return employeeRepository.findEmployeeByDayOfWeeks(localDate.getDayOfWeek()).stream().filter(employee -> employee.getEmployeeSkills().containsAll(employeeSkill)).collect(Collectors.toList());
     }
 
 

@@ -8,5 +8,5 @@ import java.time.DayOfWeek;
 import java.util.Set;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
-    Set<Employee> findEmployeeByDayOfWeek(DayOfWeek dayOfWeek);
+    Set<Employee> findEmployeeByDayOfWeeks(DayOfWeek dayOfWeek);
 }

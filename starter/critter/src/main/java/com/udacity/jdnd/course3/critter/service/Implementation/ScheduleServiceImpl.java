@@ -35,11 +35,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> findScheduleByEmployee(Employee employee) {
-        return scheduleRepository.findByEmployee(employee);
+        return scheduleRepository.findByEmployeesIds(employee);
     }
 
-    @Override
-    public List<Schedule> findScheduleByCustomer(Customer customer) {
-       return  null;
-    }
+
 }

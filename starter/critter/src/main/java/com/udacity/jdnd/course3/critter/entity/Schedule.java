@@ -23,23 +23,31 @@ public class Schedule {
         return localDate;
     }
 
+    public Schedule(Long id, LocalDate localDate, List<Long> employeesIds, List<Long> pets, Set<EmployeeSkill> employeeSkills) {
+        this.id = id;
+        this.localDate = localDate;
+        this.employeesIds = employeesIds;
+        this.pets = pets;
+        this.employeeSkills = employeeSkills;
+    }
+
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public List<Long> getEmployeesIds() {
+        return employeesIds;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setEmployeesIds(List<Long> employeesIds) {
+        this.employeesIds = employeesIds;
     }
 
-    public List<Pets> getPets() {
+    public List<Long> getPets() {
         return pets;
     }
 
-    public void setPets(List<Pets> pets) {
+    public void setPets(List<Long> pets) {
         this.pets = pets;
     }
 
@@ -52,23 +60,16 @@ public class Schedule {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private LocalDate localDate;
 
-    public Schedule(Long id, LocalDate localDate, List<Employee> employees, List<Pets> pets, Set<EmployeeSkill> employeeSkills) {
-        this.id = id;
-        this.localDate = localDate;
-        this.employees = employees;
-        this.pets = pets;
-        this.employeeSkills = employeeSkills;
-    }
 
     @ManyToMany(targetEntity = Employee.class)
-    private List<Employee> employees;
+    private List<Long> employeesIds;
 
     @ManyToMany(targetEntity = Pets.class)
-    private List<Pets> pets;
+    private List<Long> pets;
 
     @ElementCollection
     private Set<EmployeeSkill> employeeSkills;

@@ -18,7 +18,8 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public Customer save(Customer customer) {
+    public Customer save(Customer customer,List<Long> petsId) {
+
         return customerRepository.save(customer);
     }
 

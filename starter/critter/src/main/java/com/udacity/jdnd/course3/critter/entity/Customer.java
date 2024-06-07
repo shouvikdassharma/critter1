@@ -13,10 +13,12 @@ public class Customer {
     @GeneratedValue
     private  Long id;
 
-    public Customer(Long id, String name, String phoneNumber) {
+    public Customer(Long id, String name, String phoneNumber, String notes) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.notes = notes;
+
     }
 
     public Long getId() {
@@ -25,6 +27,14 @@ public class Customer {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getName() {
@@ -54,6 +64,7 @@ public class Customer {
     @Nationalized
     private String name;
     private String phoneNumber;
+    private String notes;
     
     @OneToMany(targetEntity = Pets.class)
     private List<Pets> pets;

@@ -9,8 +9,21 @@ import java.util.List;
 public class CustomerDTO {
     private long id;
     private String name;
+
+    public CustomerDTO() {
+    }
+
     private String phoneNumber;
     private String notes;
+
+    public CustomerDTO(long id, String name, String phoneNumber, String notes, List<Long> petIds) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.notes = notes;
+        this.petIds = petIds;
+    }
+
     private List<Long> petIds;
 
     public long getId() {

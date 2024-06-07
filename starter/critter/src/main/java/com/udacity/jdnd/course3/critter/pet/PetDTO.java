@@ -80,4 +80,11 @@ public class PetDTO {
     public void setId(long id) {
         this.id = id;
     }
+
+    public void setOwnerId(long id) {
+    }
+
+    public Long getOwnerId() {
+        return  null;
+    }
 }

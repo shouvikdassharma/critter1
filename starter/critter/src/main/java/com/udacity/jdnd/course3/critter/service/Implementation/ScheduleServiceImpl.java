@@ -4,6 +4,7 @@ import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pets;
 import com.udacity.jdnd.course3.critter.entity.Schedule;
+import com.udacity.jdnd.course3.critter.repository.CustomerRepository;
 import com.udacity.jdnd.course3.critter.repository.EmployeeRepository;
 import com.udacity.jdnd.course3.critter.repository.ScheduleRepository;
 import com.udacity.jdnd.course3.critter.service.ScheduleService;
@@ -22,6 +23,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    @Autowired
+    CustomerRepository customerRepository;
+
+
 
     @Override
     public Schedule save(Schedule schedule) {
@@ -34,8 +39,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> findScheduleByEmployee(Employee employee) {
-        return scheduleRepository.findByEmployeesIds(employee);
+    public List<Schedule> findScheduleByEmployee(Long employeeid) {
+        return scheduleRepository.findByEmployeesIds(employeeid);
+    }
+
+    @Override
+    public List<Schedule> getAllSchedules() {
+        return scheduleRepository.findAll();
+    }
+
+    @Override
+    public List<Schedule> findScheduleByCustomer(Long customerId) {
+        Customer customer=customerRepository.getOne(customerId);
+        return scheduleRepository.findByPetsIn(customer.getPets());
     }
 
 

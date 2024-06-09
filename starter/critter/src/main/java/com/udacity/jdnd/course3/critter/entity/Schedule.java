@@ -11,6 +11,8 @@ import java.util.Set;
 @Entity
 public class Schedule {
 
+
+
     public Long getId() {
         return id;
     }
@@ -49,6 +51,9 @@ public class Schedule {
 
     public void setPets(List<Long> pets) {
         this.pets = pets;
+    }
+
+    public Schedule() {
     }
 
     public Set<EmployeeSkill> getEmployeeSkills() {

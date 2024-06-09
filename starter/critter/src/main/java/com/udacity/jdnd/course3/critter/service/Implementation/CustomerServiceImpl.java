@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerByPetId(Pets pets) {
+    public Customer getCustomerByPetId(Long pets) {
         return customerRepository.findCustomerByPets(pets);
     }
 

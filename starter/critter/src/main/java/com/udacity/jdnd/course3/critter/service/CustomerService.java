@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CustomerService {
     Customer save(Customer customer,List<Long> id);
-    Customer getCustomerByPetId(Pets pets);
+    Customer getCustomerByPetId(Long pets);
 
     public List<Customer> getAllCustomer();
     Customer getCustomerById(Long id);

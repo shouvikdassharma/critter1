@@ -10,6 +10,9 @@ import java.util.List;
 public interface ScheduleService {
     Schedule save(Schedule schedule);
     List<Schedule> findScheduleByPet(Pets pet);
-    List<Schedule> findScheduleByEmployee(Employee employee);
+    List<Schedule> findScheduleByEmployee(Long employeeId);
+
+    List<Schedule> getAllSchedules();
+    List<Schedule> findScheduleByCustomer(Long customerId);
 
 }

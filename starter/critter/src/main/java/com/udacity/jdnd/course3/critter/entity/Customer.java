@@ -4,6 +4,7 @@ package com.udacity.jdnd.course3.critter.entity;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table
@@ -12,6 +13,9 @@ public class Customer {
     @Id
     @GeneratedValue
     private  Long id;
+
+    public Customer() {
+    }
 
     public Customer(Long id, String name, String phoneNumber, String notes) {
         this.id = id;
@@ -67,7 +71,7 @@ public class Customer {
     private String notes;
     
     @OneToMany(targetEntity = Pets.class)
-    private List<Pets> pets;
+    private List<Pets> pets=new ArrayList<>();
 
 
 }

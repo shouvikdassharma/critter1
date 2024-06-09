@@ -62,6 +62,9 @@ public class Pets {
         return id;
     }
 
+    public Pets() {
+    }
+
     public void setId(long id) {
         this.id = id;
     }

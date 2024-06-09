@@ -58,7 +58,7 @@ public class UserController {
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer  not  saved", e);
         }
-       return null;
+       return customerDTO1;
     }
 
     @GetMapping("/customer")
@@ -71,27 +71,74 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+
+        Customer customer;
+        try
+        {
+            customer=customerService.getCustomerByPetId(petId);
+        }catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner pet with id: " + petId + " not found", e);
+        }
+
+        return enitityToCustomerDTO(customer);
     }
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        Employee employee=new Employee(employeeDTO.getId(),employeeDTO.getName(),employeeDTO.getSkills(),employeeDTO.getDaysAvailable());
+        EmployeeDTO employeeDTO1;
+        try {
+            employeeDTO1=entityToEmployeeDTO(employeeService.save(employee));
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee not saved", e);
+        }
+        return employeeDTO1;
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        EmployeeDTO employeeDTO;
+        try {
+            employeeDTO=entityToEmployeeDTO(employeeService.findEmployeeById(employeeId));
+
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee pet with id: " + employeeId + " not found", e);
+        }
+        return employeeDTO;
     }
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+
+        try {
+            employeeService.setEmployeeAvailability(daysAvailable,employeeId);
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EmployeeId pet with id: " + employeeId + " not found", e);
+        }
+
     }
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        List<Employee> employees;
+        try
+        {
+            employees=employeeService.findEmployeeByDateAndSkills(employeeDTO.getDate(),employeeDTO.getSkills());
+
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Employee for sevice not found",e);
+        }
+        return employees.stream().map(this::entityToEmployeeDTO).collect(Collectors.toList());
+
     }
 
 }

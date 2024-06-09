@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
-    Customer findCustomerByPets(Pets pets);
+    Customer findCustomerByPets(Long pets);
 
 }

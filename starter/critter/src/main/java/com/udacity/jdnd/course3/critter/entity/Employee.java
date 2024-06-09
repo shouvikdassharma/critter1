@@ -27,6 +27,9 @@ public class Employee {
         return id;
     }
 
+    public Employee() {
+    }
+
     public Employee(Long id, String name, Set<EmployeeSkill> employeeSkills, Set<DayOfWeek> dayOfWeeks) {
         this.id = id;
         this.name = name;

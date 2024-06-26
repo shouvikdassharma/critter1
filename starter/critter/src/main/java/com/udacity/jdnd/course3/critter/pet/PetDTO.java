@@ -12,6 +12,8 @@ public class PetDTO {
     private long id;
     private PetType type;
 
+    private long ownerId;
+
 
 
     public PetDTO(long id, PetType type, String name, Customer customer, LocalDate birthDate, String notes) {
@@ -65,6 +67,14 @@ public class PetDTO {
         this.birthDate = birthDate;
     }
 
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
     public String getNotes() {
         return notes;
     }
@@ -81,10 +91,4 @@ public class PetDTO {
         this.id = id;
     }
 
-    public void setOwnerId(long id) {
-    }
-
-    public Long getOwnerId() {
-        return  null;
-    }
 }

@@ -22,7 +22,14 @@ public class PetController {
 
     private PetDTO convertPetEntityToDTO(Pets pets)
     {
-        return  new PetDTO(pets.getId(), pets.getPetType(), pets.getName(), pets.getCustomer(), pets.getBirthDate(), pets.getNotes());
+        PetDTO petDTO = new PetDTO();
+        petDTO.setId(pets.getId());
+        petDTO.setBirthDate(pets.getBirthDate());
+        petDTO.setName(pets.getName());
+        petDTO.setNotes(pets.getNotes());
+        petDTO.setOwnerId(pets.getCustomer().getId());
+        petDTO.setType(pets.getPetType());
+        return  petDTO;
     }
 
     @PostMapping
@@ -31,7 +38,7 @@ public class PetController {
         PetDTO dtoPet;
         try {
 
-            dtoPet=convertPetEntityToDTO(petService.save(pets,petDTO.getId()));
+            dtoPet=convertPetEntityToDTO(petService.save(pets,petDTO.getOwnerId()));
 
         }
         catch (Exception e) {

@@ -64,7 +64,7 @@ public class UserController {
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
 
-        List<Customer> customers=customerService.getAllCustomer();
+       List<Customer> customers=customerService.getAllCustomer();
         return customers.stream().map(this::enitityToCustomerDTO).collect(Collectors.toList());
 
     }

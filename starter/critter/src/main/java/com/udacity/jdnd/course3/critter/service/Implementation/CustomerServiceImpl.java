@@ -24,13 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerByPetId(Long pets) {
+    public Customer getCustomerByPetId(long pets) {
         return customerRepository.findCustomerByPets(pets);
     }
 
     @Override
     public List<Customer> getAllCustomer() {
-        return  customerRepository.findAll();
+        return customerRepository.findAll();
     }
 
     @Override

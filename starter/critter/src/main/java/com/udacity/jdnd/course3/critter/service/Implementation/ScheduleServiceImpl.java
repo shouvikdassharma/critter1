@@ -29,7 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 
     @Override
-    public Schedule save(Schedule schedule) {
+    public Schedule save1(Schedule schedule) {
         return scheduleRepository.save(schedule);
     }
 

@@ -27,10 +27,18 @@ public class ScheduleController {
     @Autowired
     PetService petService;
     private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {
-        List<Long> employeeIds = schedule.getEmployeesIds();
-        List<Long> petIds = schedule.getPets();
+//        List<Long> employeeIds = schedule.getEmployeesIds();
+//        List<Long> petIds = schedule.getPets();
+//
+//        return new ScheduleDTO(schedule.getId(), employeeIds, petIds, schedule.getLocalDate(), schedule.getEmployeeSkills());
 
-        return new ScheduleDTO(schedule.getId(), employeeIds, petIds, schedule.getLocalDate(), schedule.getEmployeeSkills());
+        ScheduleDTO scheduleDTO=new ScheduleDTO();
+        scheduleDTO.setDate(schedule.getLocalDate());
+        scheduleDTO.setActivities(schedule.getEmployeeSkills());
+        scheduleDTO.setPetIds(schedule.getPets());
+        scheduleDTO.setEmployeeIds(schedule.getEmployeesIds());
+        scheduleDTO.setId(schedule.getId());
+        return  scheduleDTO;
     }
 
     private Schedule convertScheduleDTOtoSchedule(ScheduleDTO scheduleDTO)
@@ -42,18 +50,25 @@ public class ScheduleController {
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
 
-        Schedule schedule=convertScheduleDTOtoSchedule(scheduleDTO);
-        ScheduleDTO scheduleDTO1;
-
-        try
-        {
-            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save(schedule));
-        }
-        catch (Exception e)
-        {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule can not be saved", e);
-        }
-        return scheduleDTO1;
+//        Schedule schedule=convertScheduleDTOtoSchedule(scheduleDTO);
+//        ScheduleDTO scheduleDTO1;
+//
+//        try
+//        {
+//            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save(schedule));
+//        }
+//        catch (Exception e)
+//        {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule can not be saved", e);
+//        }
+//        return scheduleDTO1;
+        Schedule schedule=new Schedule();
+        schedule.setEmployeesIds(scheduleDTO.getEmployeeIds());
+        schedule.setId(scheduleDTO.getId());
+        schedule.setPets(scheduleDTO.getPetIds());
+        schedule.setLocalDate(scheduleDTO.getDate());
+        schedule.setEmployeeSkills(scheduleDTO.getActivities());
+        return convertScheduleToScheduleDTO(scheduleService.save1(schedule));
     }
 
     @GetMapping

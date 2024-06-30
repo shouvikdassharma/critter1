@@ -22,6 +22,8 @@ public class ScheduleDTO {
         this.activities = activities;
     }
 
+
+
     public ScheduleDTO() {
     }
 

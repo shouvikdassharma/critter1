@@ -28,6 +28,7 @@ public class PetsServiceImpl implements PetService {
         pets.setCustomer(customer);
         pets=petsRepository.save(pets);
         pets1.add(pets);
+        customer.setPets(pets1);
         customerRepository.save(customer);
         return  pets;
     }

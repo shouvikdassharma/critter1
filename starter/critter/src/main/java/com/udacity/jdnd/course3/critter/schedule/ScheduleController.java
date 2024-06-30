@@ -55,20 +55,24 @@ public class ScheduleController {
 //
 //        try
 //        {
-//            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save(schedule));
+//            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save1(schedule));
 //        }
 //        catch (Exception e)
 //        {
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule can not be saved", e);
 //        }
 //        return scheduleDTO1;
-        Schedule schedule=new Schedule();
-        schedule.setEmployeesIds(scheduleDTO.getEmployeeIds());
-        schedule.setId(scheduleDTO.getId());
-        schedule.setPets(scheduleDTO.getPetIds());
-        schedule.setLocalDate(scheduleDTO.getDate());
-        schedule.setEmployeeSkills(scheduleDTO.getActivities());
-        return convertScheduleToScheduleDTO(scheduleService.save1(schedule));
+//        Schedule schedule=new Schedule();
+//        schedule.setEmployeesIds(scheduleDTO.getEmployeeIds());
+//        schedule.setId(scheduleDTO.getId());
+//        schedule.setPets(scheduleDTO.getPetIds());
+//        schedule.setLocalDate(scheduleDTO.getDate());
+//        schedule.setEmployeeSkills(scheduleDTO.getActivities());
+//        return convertScheduleToScheduleDTO(scheduleService.save1(schedule));
+        Schedule schedule=new Schedule(scheduleDTO.getDate(),scheduleDTO.getActivities());
+        ScheduleDTO scheduleDTO1;
+        scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save1(schedule));
+        return scheduleDTO1;
     }
 
     @GetMapping

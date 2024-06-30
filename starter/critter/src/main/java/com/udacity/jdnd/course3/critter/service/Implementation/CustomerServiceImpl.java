@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.service.Implementation;
 import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Pets;
 import com.udacity.jdnd.course3.critter.repository.CustomerRepository;
+import com.udacity.jdnd.course3.critter.repository.PetsRepository;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private PetsRepository petsRepository;
+
     @Override
     public Customer save(Customer customer,List<Long> petsId) {
 
@@ -24,8 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerByPetId(long pets) {
-        return customerRepository.findCustomerByPets(pets);
+    public Customer getCustomerByPetId(Long pets) {
+        return petsRepository.getOne(pets).getCustomer();
     }
 
     @Override

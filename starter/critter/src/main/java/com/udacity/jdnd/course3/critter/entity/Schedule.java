@@ -12,8 +12,9 @@ import java.util.Set;
 public class Schedule {
 
 
-    public Schedule(LocalDate date, Set<EmployeeSkill> activities) {
-    }
+
+
+
 
     public Long getId() {
         return id;

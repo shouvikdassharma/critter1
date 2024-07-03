@@ -23,9 +23,7 @@ public class Employee {
 
 
 
-    public Long getId() {
-        return id;
-    }
+
 
     public Employee() {
     }
@@ -53,11 +51,14 @@ public class Employee {
         this.dayOfWeeks = dayOfWeeks;
     }
 
+
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

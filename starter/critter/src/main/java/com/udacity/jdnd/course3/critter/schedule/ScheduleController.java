@@ -27,8 +27,8 @@ public class ScheduleController {
     @Autowired
     PetService petService;
     private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {
-        List<Long> employeeIds = schedule.getEmployeesIds();
-        List<Long> petIds = schedule.getPets();
+        List<Long> employeeIds = schedule.getEmployeesIds().stream().map(Employee::getId).collect(Collectors.toList());
+        List<Long> petIds = schedule.getPets().stream().map(Pets::getId).collect(Collectors.toList());
 
         return new ScheduleDTO(schedule.getId(), employeeIds, petIds, schedule.getLocalDate(), schedule.getEmployeeSkills());
 
@@ -41,14 +41,25 @@ public class ScheduleController {
 //        return  scheduleDTO;
     }
 
-    private Schedule convertScheduleDTOtoSchedule(ScheduleDTO scheduleDTO)
-    {
-        return  new Schedule(scheduleDTO.getId(),scheduleDTO.getDate(),scheduleDTO.getEmployeeIds(),scheduleDTO.getPetIds(),scheduleDTO.getActivities());
-    }
+//    private Schedule convertScheduleDTOtoSchedule(ScheduleDTO scheduleDTO)
+//    {
+//        return  new Schedule(scheduleDTO.getId(),scheduleDTO.getDate(),scheduleDTO.getEmployeeIds(),scheduleDTO.getPetIds(),scheduleDTO.getActivities());
+//    }
 
 
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+        Schedule schedule=new Schedule(scheduleDTO.getDate(),scheduleDTO.getActivities());
+        ScheduleDTO scheduleDTO1;
+
+        try {
+            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save1(schedule,scheduleDTO.getEmployeeIds(),scheduleDTO.getPetIds()));
+        }
+        catch (Exception e)
+        {
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST,"Not saved",e);
+        }
+        return scheduleDTO1;
 
 //        Schedule schedule=convertScheduleDTOtoSchedule(scheduleDTO);
 //        ScheduleDTO scheduleDTO1;
@@ -62,13 +73,13 @@ public class ScheduleController {
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule can not be saved", e);
 //        }
 //        return scheduleDTO1;
-        Schedule schedule=new Schedule();
-        schedule.setEmployeesIds(scheduleDTO.getEmployeeIds());
-        schedule.setId(scheduleDTO.getId());
-        schedule.setPets(scheduleDTO.getPetIds());
-        schedule.setLocalDate(scheduleDTO.getDate());
-        schedule.setEmployeeSkills(scheduleDTO.getActivities());
-        return convertScheduleToScheduleDTO(scheduleService.save1(schedule));
+//        Schedule schedule=new Schedule();
+//        schedule.setEmployeesIds(scheduleDTO.getEmployeeIds());
+//        schedule.setId(scheduleDTO.getId());
+//        schedule.setPets(scheduleDTO.getPetIds());
+//        schedule.setLocalDate(scheduleDTO.getDate());
+//        schedule.setEmployeeSkills(scheduleDTO.getActivities());
+//        return convertScheduleToScheduleDTO(scheduleService.save1(schedule));
 
     }
 

@@ -69,10 +69,10 @@ public class Employee {
 
 
     @ElementCollection
-    Set<EmployeeSkill> employeeSkills;
+    private Set<EmployeeSkill> employeeSkills;
 
     @ElementCollection
-    Set<DayOfWeek> dayOfWeeks;
+    private Set<DayOfWeek> dayOfWeeks;
     
 
 

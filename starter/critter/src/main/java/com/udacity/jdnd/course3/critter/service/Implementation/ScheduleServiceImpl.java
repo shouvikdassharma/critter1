@@ -55,7 +55,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> findScheduleByEmployee(Long employeeid) {
-        return scheduleRepository.findByEmployeesIds(employeeid);
+        Employee employee=employeeRepository.getOne(employeeid);
+        return scheduleRepository.findByEmployeesIds(employee);
     }
 
     @Override

@@ -53,7 +53,7 @@ public class ScheduleController {
         ScheduleDTO scheduleDTO1;
 
         try {
-            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save1(schedule,scheduleDTO.getEmployeeIds(),scheduleDTO.getPetIds()));
+            scheduleDTO1=convertScheduleToScheduleDTO(scheduleService.save1(schedule,scheduleDTO.getEmployeeIds(),scheduleDTO.getPetIds(),scheduleDTO.getActivities(),scheduleDTO.getDate()));
         }
         catch (Exception e)
         {
@@ -85,17 +85,9 @@ public class ScheduleController {
 
     @GetMapping
     public List<ScheduleDTO> getAllSchedules() {
-        List<ScheduleDTO>scheduleDTOS;
-        try
-        {
-            scheduleDTOS=scheduleService.getAllSchedules().stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
-        }
-        catch (Exception e)
-        {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Schedule can not be fetched", e);
-        }
-        return scheduleDTOS;
-    }
+        List<Schedule> schedules=scheduleService.getAllSchedules();
+        return schedules.stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
+     }
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {

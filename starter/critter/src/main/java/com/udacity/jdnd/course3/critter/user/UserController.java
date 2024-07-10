@@ -5,6 +5,7 @@ import com.udacity.jdnd.course3.critter.entity.Employee;
 import com.udacity.jdnd.course3.critter.entity.Pets;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
 import com.udacity.jdnd.course3.critter.service.EmployeeService;
+import com.udacity.jdnd.course3.critter.service.PetService;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,8 @@ public class UserController {
 
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    PetService petService;
 
     private CustomerDTO enitityToCustomerDTO(Customer customer)
 
@@ -71,17 +74,19 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
+        Pets pets=petService.findPetsById(petId);
 
-        Customer customer;
+
+        CustomerDTO customerDTO;
         try
         {
-            customer=customerService.getCustomerByPetId(petId);
+            customerDTO=enitityToCustomerDTO(customerService.getCustomerById(pets.getCustomer().getId()));
         }catch (Exception e)
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Owner pet with id: " + petId + " not found", e);
         }
 
-        return enitityToCustomerDTO(customer);
+        return customerDTO;
     }
 
     @PostMapping("/employee")

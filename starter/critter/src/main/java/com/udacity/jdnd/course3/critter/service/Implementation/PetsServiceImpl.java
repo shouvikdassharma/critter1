@@ -40,6 +40,7 @@ public class PetsServiceImpl implements PetService {
 
     @Override
     public List<Pets> findByCustomerId(Long custId) {
+
         return petsRepository.findPetsByCustomerId(custId);
     }
     public List<Pets> getAllPets()
@@ -47,4 +48,6 @@ public class PetsServiceImpl implements PetService {
         return petsRepository.findAll();
 
     }
+
+
 }

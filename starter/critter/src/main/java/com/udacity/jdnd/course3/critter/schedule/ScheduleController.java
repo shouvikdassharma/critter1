@@ -127,7 +127,7 @@ public class ScheduleController {
 
         List<Schedule> schedule;
        try {
-           schedule=scheduleService.findScheduleByEmployee(customerId);
+           schedule=scheduleService.findScheduleByCustomer(customerId);
        }
        catch (Exception e)
        {
